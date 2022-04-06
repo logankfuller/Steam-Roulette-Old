@@ -3,6 +3,7 @@ import configparser
 import requests
 from math import isnan
 import random
+import os
 
 app = Flask(__name__)
 
@@ -27,7 +28,7 @@ def spin():
         print('%s is a VanityURL' % steam_id)
         response = requests.get('https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/',
                                 params={
-                                    'key': parser['api_keys']['steam'], 'vanityurl': steam_id},
+                                    'key': os.environ.get('STEAM_API_KEY', None), 'vanityurl': steam_id},
                                 )
 
         json_response = response.json()
@@ -40,7 +41,7 @@ def spin():
 
     # Begin to retrieve a list of games owned by the player
     response = requests.get('https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/',
-                            params={'key': parser['api_keys']['steam'], 'steamid': steam_id, 'include_appinfo': 1,
+                            params={'key': os.environ.get('STEAM_API_KEY', None), 'steamid': steam_id, 'include_appinfo': 1,
                                     'include_played_free_games': 1},
                             )
 
