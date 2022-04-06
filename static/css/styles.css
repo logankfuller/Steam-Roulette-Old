@@ -6,7 +6,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
     color: white;
@@ -47,7 +48,13 @@ input[type="text"]:focus {
 
 #container {
     margin: auto;
+}
+
+header,
+#content {
     max-width: 225px;
+    margin: auto;
+    text-align: center;
 }
 
 #results {

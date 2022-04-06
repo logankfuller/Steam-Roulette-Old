@@ -26,7 +26,8 @@ def spin():
     else:
         print('%s is a VanityURL' % steam_id)
         response = requests.get('https://api.steampowered.com/ISteamUser/ResolveVanityURL/v1/',
-                                params={'key': parser['api_keys']['steam'], 'vanityurl': steam_id},
+                                params={
+                                    'key': parser['api_keys']['steam'], 'vanityurl': steam_id},
                                 )
 
         json_response = response.json()
@@ -52,7 +53,7 @@ def spin():
 
         print("Selected %s" % selected_game)
 
-        selected_game_json = {'name': selected_game['name'], 'img_logo_url': selected_game['img_logo_url'],
+        selected_game_json = {'name': selected_game['name'], 'img_logo_url': 'https://cdn.akamai.steamstatic.com/steam/apps/' + str(selected_game['appid']) + '/header.jpg',
                               'app_id': selected_game['appid']}
 
         return jsonify(selected_game_json)
